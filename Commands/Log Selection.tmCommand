@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/env ruby
+  
+  require ENV['TM_BUNDLE_SUPPORT']+'/lib/print_selection'
+  PrintSelection.generate("Logger.log");
+  
+  </string>
+	<key>input</key>
+	<string>document</string>
+	<key>keyEquivalent</key>
+	<string>@0</string>
+	<key>name</key>
+	<string>Log Selection</string>
+	<key>output</key>
+	<string>insertAsSnippet</string>
+	<key>scope</key>
+	<string>source.actionscript.3</string>
+	<key>uuid</key>
+	<string>B3C64ECD-97E7-4B25-8402-86A2B9BBDD95</string>
+</dict>
+</plist>
