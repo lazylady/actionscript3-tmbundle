@@ -49,7 +49,11 @@ module AS3Project
     def self.definitions(paths, relative_path_from=nil)
         classes = {}
         paths.each do |path|
-        source_path = Pathname.new(File.join(@project,path))
+          if path =~ /^\/Users\//
+            source_path = Pathname.new(path)
+          else
+            source_path = Pathname.new(File.join(@project,path))
+          end
 
         Find.find(source_path.to_s) do |f|
             if f =~ /.as$/
@@ -79,7 +83,11 @@ module AS3Project
         source_path = []
 
         paths.each do |path|
-            source_path.push "-sp+="+File.join(@project, path)
+           if path =~ /^\/Users\//
+              source_path.push "-sp+=" + path
+            else
+              source_path.push "-sp+="+File.join(@project, path)
+            end
         end
 
         source_path.join(" ")
@@ -193,7 +201,7 @@ module AS3Project
     end
 
     def self.compile()
-
+      
         mxmlc_parser = MxmlcExhaust.new
         mxmlc_parser.print_output = true
 
