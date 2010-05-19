@@ -533,10 +533,28 @@ class ClassParser
   def create_src_list
 
     if ENV['TM_PROJECT_DIRECTORY']
+      
+      proj_dir = ENV['TM_PROJECT_DIRECTORY'] || ''
+      custom = "#{proj_dir}/#{ENV['TM_FLEX_BUILD_FILE']}"
+      @src_dirs = ""    
+      
+      if custom =~ /\.y(a)?ml$/
+               
+  			source_path = SourceTools.common_src_dirs()
+  			source_path.each do |path|
 
-      src_list = (ENV['TM_AS3_USUAL_SRC_DIRS'] != nil) ? ENV['TM_AS3_USUAL_SRC_DIRS'].gsub(':','|') : "src"
-      @src_dirs = `find -dE "$TM_PROJECT_DIRECTORY" -maxdepth 5 -regex '.*\/(#{src_list})' -print 2>/dev/null`
-
+          if path =~ /^\/Users\//
+            @src_dirs += `find -d #{path.to_s} -maxdepth 1 -print 2>/dev/null`
+          else
+            @src_dirs += `find -d #{ENV['TM_PROJECT_DIRECTORY'] + "/" + path.to_s} -maxdepth 1 -print 2>/dev/null`
+          end
+          
+        end
+      else
+        src_list = (ENV['TM_AS3_USUAL_SRC_DIRS'] != nil) ? ENV['TM_AS3_USUAL_SRC_DIRS'].gsub(':','|') : "src"
+        @src_dirs = `find -dE "$TM_PROJECT_DIRECTORY" -maxdepth 5 -regex '.*\/(#{src_list})' -print 2>/dev/null`
+			end
+  			
     end
 
     cs = "#{@completion_src}/data/completions"

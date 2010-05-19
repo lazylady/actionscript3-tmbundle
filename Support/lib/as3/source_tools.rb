@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby -wKU
 # encoding: utf-8
 
+require "#{ENV['TM_BUNDLE_SUPPORT']}/lib/fm/as3project"
+
 # ActionScript 3 utility methods for inspecting source directories, paths and
 # packages.
 #
@@ -21,7 +23,12 @@ module SourceTools
   # as the root directory for source files.
   #
   def self.common_src_dirs
-    src_dirs_matches = common_src_dir_list.split(":")
+    src_dirs_matches = []
+    AS3Project.source_path_list.each do |source_path|
+      source_path.gsub("/",".")
+      src_dirs_matches << source_path
+    end
+    src_dirs_matches << common_src_dir_list.split(":")
     src_dirs_matches
   end
 
@@ -100,6 +107,53 @@ module SourceTools
     { :exact_matches => best_paths, :partial_matches => package_paths }
 
   end
+  
+  # @author Ted Broberg, Lazy Lady
+  # @since 18 May 2010
+  def self.each_text_file_in_dir(dir, &block)
+    TextMate.scan_dir(dir, block, TextMate::ProjectFileFilter.new)
+  end
+  
+  # @author Ted Broberg, Lazy Lady
+  # @since 18 May 2010
+  def self.search_build_file_paths(word)
+    
+    project_dir = ENV['TM_PROJECT_DIRECTORY']
+    return if project_dir.nil?
+    
+    best_paths = []
+    package_paths = []
+    
+    AS3Project.source_path_list.each do |lib|
+
+      each_text_file_in_dir(lib) do |file|
+
+         if file =~ /\b#{word}\w*\.(as|mxml)$/
+
+           # This allows the library path to be outside the project, the external path must be ABSOLUTE.
+           if file =~ /^\/Users\//
+             path = file
+           else
+             path = File.join(project_dir, file)
+           end
+           
+           path = truncate_to_src(path)
+           path = path.gsub(/\.(as|mxml)$/,'').gsub( "/", ".").sub(/^\./,'')
+
+           if path =~ /\b#{word}$/
+             best_paths << path
+           else
+             package_paths << path
+           end
+       
+         end
+
+      end 
+    end
+    
+    { :exact_matches => best_paths, :partial_matches => package_paths }
+    
+  end
 
   # Loads both bundle and project paths.
   #
@@ -111,9 +165,13 @@ module SourceTools
     # @author jeremy.ruppel
     # @since 07 May 2010
     sp = search_swc_paths(word)
+    
+    # @author Ted Broberg, Lazy Lady
+    # @since 18 May 2010
+    bfp = search_build_file_paths(word)
 
-    e = pp[:exact_matches] + bp[:exact_matches] + sp[:exact_matches]
-    p = pp[:partial_matches] + bp[:partial_matches] + sp[:partial_matches]
+    e = pp[:exact_matches] + bp[:exact_matches] + sp[:exact_matches] + bfp[:exact_matches]
+    p = pp[:partial_matches] + bp[:partial_matches] + sp[:partial_matches] + bfp[:partial_matches]
 
     e.uniq!
     p.uniq!
@@ -303,7 +361,6 @@ module SourceTools
   end
 
 end
-
 # if __FILE__ == $0
 #
 # end
