@@ -121,7 +121,18 @@ module AS3Project
 
         if build_file.has_key?("applications")
             build_file.fetch("applications").each do |app|
-                if app && app.has_key?("class") && app.has_key?("output")
+              
+              if app && app.has_key?("include_sources") && app.has_key?("output")
+	
+                include_sources = File.join(@project, app.fetch("include_sources")) rescue ""
+
+                output = File.join(@project, app.fetch("output"))
+              
+                app_obj = {"klass"=>" an swc file just for you!", "swc_build"=>true}
+                app_obj["mxmlc"] = "compc -include-sources=#{include_sources} -o=#{output}"
+                apps.push(app_obj)
+                  
+              elsif app && app.has_key?("class") && app.has_key?("output")
                     debug = app.fetch("debug") rescue mxmlc_default_debug
                     extra = app.fetch("extra") rescue mxmlc_default_extra
                     klass = File.join(@project, app.fetch("class"))
