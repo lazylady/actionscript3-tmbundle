@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/env ruby -wKU
+
+require ENV['TM_BUNDLE_SUPPORT']+'/lib/c_env'
+
+word   = ENV['TM_CURRENT_WORD']
+currentLine   = ENV['TM_CURRENT_LINE']
+line_num = ENV['TM_LINE_NUMBER']
+line_idx = ENV['TM_LINE_INDEX']
+
+valid_check = var =  /^\s*(var)\s*\S/
+if(!currentLine.match(valid_check))
+	TextMate.exit_show_tool_tip("Invalid Line for Promotion")
+end
+
+#Attempt to find the variable name from the current line
+wordFinder = currentLine.split(":")[0];
+wordFinder = wordFinder.split("=")[0];
+wordFinder = wordFinder.split("var ")
+
+#Searches for the word in syntax 
+# var varName:variableType = new VariableType()
+# var varName = new VariableType();
+# var varName
+
+if(wordFinder[1])
+	word = wordFinder[1]
+else
+	word = wordFinder[0]
+end
+word = word.strip().delete(";");
+
+#Searches for Typeing of the current Variable
+# :VariableType
+# new VariableType()
+typeSplit = currentLine.split(":")
+type = nil;
+if(typeSplit[1]) 
+	type = typeSplit[1].split(" ")[0]; 
+else
+	typeSplit = currentLine.split("= new ");
+	if(typeSplit[1])
+		type = typeSplit[1].split("(")[0];
+	end
+end
+#TextMate.exit_show_tool_tip("var #{word} already exists")
+
+pkg = /^\s*package\b\s*([\w+\.]*)/
+cls = /^\s*(public|final)\s+(final|public)?\s*\b(class|interface)\b/
+func = /^\s*(public|private|protected)\s*\b(function)\b/
+doc    = STDIN.read.strip
+
+pre, imps, post = [], [], []
+a = pre
+	
+doc.split("\n").each do |line|
+	if line == currentLine
+		modifiedLine = currentLine
+		modifiedLine = modifiedLine.gsub("var ", "")
+		if type
+			modifiedLine = modifiedLine.gsub(":#{type}", "");
+		end
+		a &lt;&lt; modifiedLine
+	else
+		a &lt;&lt; line
+	end
+	if line =~ cls
+		cls = nil
+		a = imps
+	elsif line =~ func
+		func = nil
+		a = post
+	end
+end
+
+var =  /^\s*(public|private|protected)\s*\b(var)\b\s+#{word}+(;|:| )/
+safe = 0
+indent = "\t\t"
+
+imps.each_with_index do |line,index|
+	if line =~ var		
+		TextMate.exit_show_tool_tip("var #{word} already exists")
+	elsif line =~ /^\s*(public|private|protected)\s*\b(var)\b/
+		safe = index
+	end
+end
+
+if(type)
+	imps[safe] = "#{imps[safe]}\n#{indent}private var #{word}:#{type};"
+else
+	imps[safe] = "#{imps[safe]}\n#{indent}private var #{word};"
+end
+
+print pre.join("\n")+"\n"+imps.join("\n")+"\n"+post.join("\n")
+
+pid = fork do
+	STDOUT.reopen(open('/dev/null'))
+	STDERR.reopen(open('/dev/null'))
+	TextMate.go_to(:line =&gt; line_num.to_i+1, :column =&gt; line_idx)
+end</string>
+	<key>input</key>
+	<string>document</string>
+	<key>keyEquivalent</key>
+	<string>@!</string>
+	<key>name</key>
+	<string>Promote Variable</string>
+	<key>output</key>
+	<string>replaceDocument</string>
+	<key>scope</key>
+	<string>source.actionscript.3</string>
+	<key>uuid</key>
+	<string>ACE07F10-57EA-4299-9C71-73BEAF2BC173</string>
+</dict>
+</plist>
