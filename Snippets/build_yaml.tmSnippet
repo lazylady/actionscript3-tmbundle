@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>---
+default:
+    - debug: false
+      open: bin/${1:Main}.swf
+      extra: -use-network=false
+    
+library-path:
+    - ${2:libs}
+
+source-path:
+    - ${3:src}
+    
+applications:
+    - class: src/$1.as
+      output: bin/$1.swf
+	
+	#Generates an swc from given directory
+	#- include_sources: ${4:src/package}
+	  #output: ${5:bin/libName}.swc
+	
+# asdoc:
+#     - title: "My ActionScript project"
+#       footer: "My ActionScript project footer"
+#       output: docs
+#       doc-sources:
+#         - src
+#       exclude-dirs:
+#         - src/dev</string>
+	<key>name</key>
+	<string>build.yaml</string>
+	<key>scope</key>
+	<string>source.yaml</string>
+	<key>tabTrigger</key>
+	<string>build</string>
+	<key>uuid</key>
+	<string>4FE200CA-211B-44B1-835F-FF2263562E01</string>
+</dict>
+</plist>
