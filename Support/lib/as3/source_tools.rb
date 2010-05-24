@@ -28,7 +28,10 @@ module SourceTools
       source_path.gsub("/",".")
       src_dirs_matches << source_path
     end
-    src_dirs_matches << common_src_dir_list.split(":")
+    
+    common_src_dir_list.split(":").each do |source_path|
+      src_dirs_matches << source_path
+    end
     src_dirs_matches
   end
 
@@ -275,7 +278,7 @@ module SourceTools
     end
     #if no src dirs are recognised scan the whole proj.
     dirs << pr if dirs.empty?
-
+    
     for dir in dirs
         Find.find(dir) do |path|
 
@@ -307,7 +310,7 @@ module SourceTools
   # @author jeremy.ruppel
   # @since 07 May 2010
   def self.search_swc_paths(word)
-
+    
     begin
 
       require "rubygems"
@@ -332,26 +335,29 @@ module SourceTools
 
     best_paths = []
     package_paths = []
+    
+    AS3Project.libray_path_list.each do |lib|
+      
+      Dir.glob( File.join( ENV['TM_PROJECT_DIRECTORY'] + "/" + lib.to_s, "**/*.swc" ) ).each do |swc|
+        
+        Zip::ZipFile.open( swc ) do |zip|
 
-    Dir.glob( File.join( ENV['TM_PROJECT_DIRECTORY'], "**/*.swc" ) ).each do |swc|
+          cat = Nokogiri::XML( zip.read( 'catalog.xml' ) )
+          cat.remove_namespaces!
+          cat.xpath( '//swc/libraries/library/script' ).each do |s|
 
-      Zip::ZipFile.open( swc ) do |zip|
+            path = s[ 'name' ].gsub( '/', '.' )
 
-        cat = Nokogiri::XML( zip.read( 'catalog.xml' ) )
-        cat.remove_namespaces!
-        cat.xpath( '//swc/libraries/library/script' ).each do |s|
+            next if path[ /flash_display_Sprite/ ]
+            next unless path =~ /#{word}/
 
-          path = s[ 'name' ].gsub( '/', '.' )
+            if path =~ /(^|\.)#{word}$/
+              best_paths << path
+            else
+              package_paths << path
+            end
 
-          next if path[ /flash_display_Sprite/ ]
-          next unless path =~ /#{word}/
-
-          if path =~ /(^|\.)#{word}$/
-            best_paths << path
-          else
-            package_paths << path
           end
-
         end
       end
     end
@@ -359,7 +365,7 @@ module SourceTools
     { :exact_matches => best_paths, :partial_matches => package_paths }
 
   end
-
+  
 end
 # if __FILE__ == $0
 #
