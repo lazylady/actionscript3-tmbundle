@@ -64,7 +64,7 @@ class ClassParser
     @interface_extends_regexp = /^\s*(public)\s+(dynamic\s+)?(final\s+)?(class|interface)\s+(\w+)\s+(extends)\s+\b((?m:.*))\{/ #}
     @private_class_regexp = /^class\b/
 
-    @static_member_regexp = /^([A-Z][a-z]\w*|\b(uint|int|arguments)\b)$/
+    @static_member_regexp = /^([A-Z]+[a-z]\w*|\b(uint|int|arguments)\b)$/
 
     # Constructors.
     @constructor_regexp = /^\s*public\s+function\s+\b([A-Z]\w+)\b\s*\(/
@@ -544,12 +544,12 @@ class ClassParser
   			source_path.each do |path|
 
           if path =~ /^\/Users\//
-            @src_dirs += `find -d #{path.to_s} -maxdepth 1 -print 2>/dev/null`
+            @src_dirs += `find -d #{path.to_s} -maxdepth 5 -print 2>/dev/null`
           else
-            @src_dirs += `find -d #{ENV['TM_PROJECT_DIRECTORY'] + "/" + path.to_s} -maxdepth 1 -print 2>/dev/null`
+            @src_dirs += `find -d #{ENV['TM_PROJECT_DIRECTORY'] + "/" + path.to_s} -maxdepth 5 -print 2>/dev/null`
           end
           
-        end
+      end
       else
         src_list = (ENV['TM_AS3_USUAL_SRC_DIRS'] != nil) ? ENV['TM_AS3_USUAL_SRC_DIRS'].gsub(':','|') : "src"
         @src_dirs = `find -dE "$TM_PROJECT_DIRECTORY" -maxdepth 5 -regex '.*\/(#{src_list})' -print 2>/dev/null`
