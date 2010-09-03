@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/env ruby -wKU
+
+require ENV['TM_BUNDLE_SUPPORT'] + '/lib/c_env'
+
+doc = STDIN.read.split("\n")
+line_num = ENV['TM_LINE_NUMBER'].to_i
+var = /^\s*(var)\s+\b(\w+)/
+first_word = /^\s*\b(\w+)*/
+
+line = doc[line_num - 2]
+
+# Search for 'var obj' declaration.
+if line.match(var)
+  word = line.split(var)[2].to_s
+# Just grab the first word on line above
+elsif line.match(first_word)
+  word = line.scan(first_word)[0].to_s
+end
+
+snip = "addChild(#{word});"
+
+TextMate.exit_insert_snippet( snip )</string>
+	<key>fallbackInput</key>
+	<string>word</string>
+	<key>input</key>
+	<string>document</string>
+	<key>name</key>
+	<string>addChild</string>
+	<key>output</key>
+	<string>discard</string>
+	<key>scope</key>
+	<string>source.actionscript.3</string>
+	<key>tabTrigger</key>
+	<string>addChild</string>
+	<key>uuid</key>
+	<string>38EE74D6-05BF-485E-BD9F-B7EF23A6327D</string>
+</dict>
+</plist>
