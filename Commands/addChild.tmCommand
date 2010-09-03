@@ -12,7 +12,7 @@ require ENV['TM_BUNDLE_SUPPORT'] + '/lib/c_env'
 doc = STDIN.read.split("\n")
 line_num = ENV['TM_LINE_NUMBER'].to_i
 var = /^\s*(var)\s+\b(\w+)/
-first_word = /^\s*\b(\w+)*/
+first_word = /\w+/
 
 line = doc[line_num - 2]
 
