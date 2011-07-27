@@ -273,9 +273,7 @@ module AS3Project
           libs << "#{lib}"
         end
       else
-        libs = ['libs']
         dirs = `ls "$TM_PROJECT_DIRECTORY/libs" 2>/dev/null`.split("\n")
-        # dirs << `ls "$TM_PROJECT_DIRECTORY/lib" 2>/dev/null`.split("\n")
         dirs.each { |d| libs << "libs/#{d}" }
       end
       libs
