@@ -4,10 +4,11 @@
 require 'yaml'
 require 'digest/md5'
 require 'fileutils'
+require "logger"
 
 module AS3Project
 
-    # @logger = Logger.new('/tmp/fcshd/gui.log')
+    # @logger = Logger.new("#{ENV['HOME']}/Library/Logs/TextMate\ ActionScript\ 3.log"
     # @logger.level = Logger::DEBUG
 
     @project = ENV['TM_PROJECT_DIRECTORY']
@@ -263,10 +264,20 @@ module AS3Project
     end
     
     def self.library_path_list
-      dirs = `ls "$TM_PROJECT_DIRECTORY/lib" 2>/dev/null`.split("\n")
-      dirs << `ls "$TM_PROJECT_DIRECTORY/libs" 2>/dev/null`.split("\n")
-      libs = ['lib']
-      dirs.each { |d| libs << "lib/#{d}" }
+      libs = ['']
+      
+      # Firstly use build.yaml settings else fallback to default dir
+      if build_file.has_key?("library-path")
+        build_file.fetch("library-path").each do |lib|
+          # @logger.debug("adding swc lib from build.yaml: #{lib}")
+          libs << "#{lib}"
+        end
+      else
+        libs = ['libs']
+        dirs = `ls "$TM_PROJECT_DIRECTORY/libs" 2>/dev/null`.split("\n")
+        # dirs << `ls "$TM_PROJECT_DIRECTORY/lib" 2>/dev/null`.split("\n")
+        dirs.each { |d| libs << "libs/#{d}" }
+      end
       libs
     end
     
