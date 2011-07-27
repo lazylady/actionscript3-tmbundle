@@ -739,7 +739,7 @@
 			<key>comment</key>
 			<string>AS3 Definition - support.function.global, previous TM storage.type.global.actionscript.3</string>
 			<key>match</key>
-			<string>\b(Array|Boolean|Class|Date|int|Number|Object|XML|XMLList|uint|String)\b</string>
+			<string>\b(Array|Boolean|Class|Date|int|Number|Object|XML|XMLList|uint|String|Vector)\b</string>
 			<key>name</key>
 			<string>support.type.function.global.actionscript.3</string>
 		</dict>
