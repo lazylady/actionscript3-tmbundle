@@ -1,60 +1,23 @@
-//AS3///////////////////////////////////////////////////////////////////////////
-// 
-// Copyright ${TM_YEAR} ${TM_ORGANIZATION_NAME:-$TM_FULLNAME}
-// 
-////////////////////////////////////////////////////////////////////////////////
-
 package ${TM_CLASS_PATH}
 {
-
-/**
- * Class.
- * 
- * @langversion ActionScript 3.0
- * @playerversion Flash 9.0
- * 
- * @author ${TM_FULLNAME}
- * @since  ${TM_DATE}
- */
-public class ${TM_NEW_FILE_BASENAME} extends Object
-{
-	
-	//--------------------------------------
-	// CLASS CONSTANTS
-	//--------------------------------------
-	
-	//--------------------------------------
-	//  CONSTRUCTOR
-	//--------------------------------------
 	
 	/**
-	 * @constructor
+	 * 
+	 * @author 	${TM_FULLNAME}
+	 * @site	www.lazylady.se
+	 * @since	${TM_DATE}
+	 * @version	1.0
 	 */
-	public function ${TM_NEW_FILE_BASENAME}()
+	public class ${TM_NEW_FILE_BASENAME}
 	{
-		super();
+		
+		public function ${TM_NEW_FILE_BASENAME}()
+		{
+			
+		}
+		
+		
+		
 	}
 	
-	//--------------------------------------
-	//  PRIVATE VARIABLES
-	//--------------------------------------
-	
-	//--------------------------------------
-	//  GETTER/SETTERS
-	//--------------------------------------
-	
-	//--------------------------------------
-	//  PUBLIC METHODS
-	//--------------------------------------
-	
-	//--------------------------------------
-	//  EVENT HANDLERS
-	//--------------------------------------
-	
-	//--------------------------------------
-	//  PRIVATE & PROTECTED INSTANCE METHODS
-	//--------------------------------------
-	
-}
-
 }

@@ -6,23 +6,24 @@
 	<string>---
 default:
     - debug: false
-      open: bin/${1:Main}.swf
+      open: Main.swf
       extra: -use-network=false
+             -static-link-runtime-shared-libraries=true
     
 library-path:
-    - ${2:libs}
+    - lib
 
 source-path:
-    - ${3:src}
+    - src
     
 applications:
-    - class: src/$1.as
-      output: bin/$1.swf
-	
-	#Generates an swc from given directory
-	#- include_sources: ${4:src/package}
-	  #output: ${5:bin/libName}.swc
-	
+    - class: src/Main.as
+      output: Main.swf
+    
+    #Generates an swc from given directory
+    #- include_sources: src/package
+      #output: bin/libName.swc
+    
 # asdoc:
 #     - title: "My ActionScript project"
 #       footer: "My ActionScript project footer"

@@ -41,15 +41,11 @@ class PrintSelection
 
     line_number = ENV['TM_LINE_NUMBER'].to_i
     current_word = ENV['TM_SELECTED_TEXT'].to_s;
-
-    # if(current_word == "")
-    #      TextMate.exit_show_tool_tip("Nothing selected.")
-    #    end
-
+    
     next_line = doc[line_number].to_s
 
     trace_str = ""
-
+    
     if(next_line.index("{"))
       line_number += 1
       trace_str = "\n\t"
@@ -62,7 +58,11 @@ class PrintSelection
     TextMate.go_to(:line => line_number, :column => line_idx)
 
     trace_str += output_method;
-
+    
+    if(method_name == class_name)
+      method_name = "constructor"
+    end
+    
     if(current_word == "")
       trace_str += '("' + class_name + ' > ' + method_name + '");'
     else

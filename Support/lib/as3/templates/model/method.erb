@@ -1,4 +1,4 @@
-<%= asdoc %><%= ns %> function ${1:<%= name %>}($2):${3:void}
+<%= asdoc %>${1:<%= ns %>} function ${2:<%= name %>}($3):${4:void}
 {
-	$0${3/void$|(.+)/(?1:return null;)/}
+	$0${4/void$|(.+)/(?1:return null;)/}
 }

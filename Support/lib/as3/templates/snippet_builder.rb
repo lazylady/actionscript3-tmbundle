@@ -51,7 +51,7 @@ class SnippetBuilder
   # = Methods =
   # ===========
 
-  def method(name="name",ns="public",doc_tag="private")
+  def method(name="name",ns="private",doc_tag="private")
     generate_method(name,ns,doc_tag,@t.method)
   end
 
@@ -59,7 +59,7 @@ class SnippetBuilder
     generate_method(name,ns,doc_tag,@t.o_method)
   end
 
-  def method_handler(name="name",ns="public",doc_tag="private")
+  def method_handler(name="name",ns="private",doc_tag="private")
     generate_method(name,ns,doc_tag,@t.method_handler)
   end
 
@@ -131,7 +131,12 @@ class SnippetBuilder
 
     name = "name" if name.empty?
 
+    # HACK just tired of not having option to use as doc class headers only and not method as doc generation as well
+    oldRef = @as3_doc
+    @as3_doc = nil
     asdoc = doc(doc_tag,true)
+    @as3_doc = oldRef
+    # HACK end
 
     b = binding
     d = File.read(file)

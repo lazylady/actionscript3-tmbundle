@@ -13,6 +13,7 @@ doc = STDIN.read.split("\n")
 line_num = ENV['TM_LINE_NUMBER'].to_i
 var = /^\s*(var)\s+\b(\w+)/
 first_word = /\w+/
+controller = /(controller)+\b/i
 
 line = doc[line_num - 2]
 
@@ -22,6 +23,10 @@ if line.match(var)
 # Just grab the first word on line above
 elsif line.match(first_word)
   word = line.scan(first_word)[0].to_s
+end
+
+if word.match(controller)
+  word += ".view"
 end
 
 snip = "addChild(#{word});"

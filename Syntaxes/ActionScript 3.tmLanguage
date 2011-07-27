@@ -113,7 +113,7 @@
 					  (\b(dynamic|final)\b\s+)?		# Optional dynamic or final
 					  (\b(internal|public)\b\s+)?	# Optional public or internal
 					  (\b(dynamic|final)\b\s+)?		# Optional dynamic or final
-					  (?=class)						# Class definition
+					  (?=class|function)			# Class | Function definition
 					</string>
 			<key>beginCaptures</key>
 			<dict>

@@ -42,7 +42,7 @@ else
 
   irgx = /^\s*import\s+#{import.gsub('.', '\.')}(\s|;)/
   safe = 0
-  indent = ""
+  indent = "\t"
 
   imps.each_with_index do |line,index|
     if line =~ irgx
