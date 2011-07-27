@@ -19,6 +19,9 @@ whilst developing. Essentially it slims down the 'master' branch and adds a
 little alpha and beta flavour. Maintenance, tweaks and feature improvements will 
 be found here first - but won't be guaranteed to make it into the official bundle.
 
+Since the implementation of Lucas Dupins' awesome swc-autocompletion the sg branch is dependent of the 'daemon' gem, install from Terminal with:
+sudo gem install daemons
+
 'master' differences:
 
  * FCSH build integrated into TM. 
