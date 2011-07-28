@@ -13,7 +13,10 @@ module AS3Project
 
     @project = ENV['TM_PROJECT_DIRECTORY']
     @build_yaml = nil
-
+    
+    # Surpressing warnings of duplicate methods due to Monkey Pathching?
+    $VERBOSE = nil
+    
     def self.build_file
         if !@build_yaml:
             build_file_path = ENV['TM_FLEX_BUILD']
