@@ -151,6 +151,7 @@
 <a href='flash/events/SyncEvent.html'>SyncEvent</a>
 <a href='flash/events/TextEvent.html'>TextEvent</a>
 <a href='flash/events/TimerEvent.html'>TimerEvent</a>
+<a href='flash/events/UncaughtErrorEvent.html'>UncaughtErrorEvent</a>
 <a href='flash/external/ExternalInterface.html'>ExternalInterface</a>
 <a href='flash/filesystem/File.html'>File</a>
 <a href='flash/filesystem/FileMode.html'>FileMode</a>

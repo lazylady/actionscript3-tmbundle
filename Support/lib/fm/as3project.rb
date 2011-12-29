@@ -8,8 +8,8 @@ require "logger"
 
 module AS3Project
 
-    # @logger = Logger.new("#{ENV['HOME']}/Library/Logs/TextMate\ ActionScript\ 3.log"
-    # @logger.level = Logger::DEBUG
+    @logger = Logger.new("#{ENV['HOME']}/Library/Logs/TextMate\ ActionScript\ 3.log")
+    @logger.level = Logger::DEBUG
 
     @project = ENV['TM_PROJECT_DIRECTORY']
     @build_yaml = nil
@@ -314,12 +314,22 @@ module AS3Project
 
         #Create a directory in the temp folder for holding the unpacked files
         FileUtils.mkdir_p lib_path unless File.directory? lib_path
-
+        
         #Unpack files in this folder
-        Dir.entries(File.join(project, p)).delete_if{|d| not d =~ /\.swc/}.each do |entry|
+        directory = File.join(project, p)
+        
+        # Tmp fix – this assumes that we only would wan't folders as Dir.entries is used below
+        if !File.exists?(directory) || !File.directory?(directory)
+          # path is not a directory
+          @logger.debug("Directory: #{directory} IS NOT A DIRECTORY")
+          next
+        end
+        
+        Dir.entries(directory).delete_if{|d| not d =~ /.swc$/}.each do |entry|
 
           #Full path to file
           swc_path = File.join(project, p, entry)
+          @logger.debug("SWC PATH : #{swc_path}")
           extraction_path = File.join lib_path, entry
 
           #Checking if file changed
