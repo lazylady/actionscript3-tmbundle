@@ -2611,6 +2611,7 @@
 			<string>uint</string>
 			<string>UITextField</string>
 			<string>UITextFormat</string>
+			<string>UncaughtErrorEvent</string>
 			<string>uncompress</string>
 			<string>underline</string>
 			<string>underlineToolTip</string>
