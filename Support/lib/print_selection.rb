@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby -wKU
+#!/usr/bin/env ruby -KU
 
 require ENV['TM_BUNDLE_SUPPORT']+'/lib/c_env'
 
@@ -6,7 +6,7 @@ class PrintSelection
   
   def self.generate(output_method)
 
-    line_number = ENV['TM_LINE_NUMBER'].to_i-1
+    lines_left = line_num = ENV['TM_SELECTION'].split(":")[0].to_i
 
     class_name = File.basename(ENV['TM_FILENAME'],".as")
     doc = STDIN.read.split("\n")
@@ -17,9 +17,9 @@ class PrintSelection
 
     method_name = ""
 
-    while line_number > 0
+    while lines_left > 0
 
-        txt = doc[line_number].to_s
+        txt = doc[lines_left].to_s
 
         m = function_regexp.match(txt) 
         method_name = m[1] unless m == nil
@@ -32,31 +32,28 @@ class PrintSelection
 
         break if method_name != ""
 
-        line_number -= 1
-
+        lines_left -= 1
     end
-
-    line_idx = ENV['TM_CURRENT_LINE']
-    line_idx = line_idx.length+1
-
-    line_number = ENV['TM_LINE_NUMBER'].to_i
-    current_word = ENV['TM_SELECTED_TEXT'].to_s;
     
-    next_line = doc[line_number].to_s
+    end_of_line = ENV['TM_CURRENT_LINE'].to_i
+    current_word = ENV['TM_SELECTED_TEXT'] || ""
+    
+    # TextMate.exit_show_tool_tip "line num : " + line_num.to_s
+    
+    next_line = doc[line_num].to_s
 
     trace_str = ""
     
     if(next_line.index("{"))
-      line_number += 1
+      line_num += 1
       trace_str = "\n\t"
-    elsif(doc[line_number - 1].to_s.index("case"))
+    elsif(doc[line_num - 1].to_s.index("case"))
         trace_str = "\n\t"
     elsif(current_word != "")
       trace_str = "\n"
     end
 
-    TextMate.go_to(:line => line_number, :column => line_idx)
-
+    TextMate.go_to(:line => line_num, :column => end_of_line)
     trace_str += output_method;
     
     if(method_name == class_name)
@@ -72,5 +69,9 @@ class PrintSelection
     print trace_str
     
   end
+
+end
+
+if __FILE__ == $0
   
 end
