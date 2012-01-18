@@ -37,7 +37,7 @@ if short_hand.key?(class_type)
     TextMate.exit_insert_snippet( short_hand[class_type] )
 end
 
-words = `grep "^#{class_type}\(" "$TM_BUNDLE_PATH/support/data/completions.txt"`.split("\n")
+words = `grep "^#{class_type}\(" "$TM_BUNDLE_SUPPORT/data/completions.txt"`.split("\n")
 if words.size == 1
 	i=0
 	snip = "new " + FlexMate.snippetize_method_params(words[0])
@@ -45,7 +45,8 @@ else
 	snip = "new ${1:#{class_type}}($2);$0"
 end
 
-TextMate.exit_insert_snippet( snip )</string>
+TextMate.exit_insert_snippet( snip )
+</string>
 	<key>fallbackInput</key>
 	<string>word</string>
 	<key>input</key>

@@ -24,7 +24,7 @@ end
 run
 
 # WARNING only enable for testing.
-# if __FILE__ == $0
-#   ARGV[0] = "-start"
-#   run
-#end
+if __FILE__ == $0
+  ARGV[0] = "-start"
+  run
+end

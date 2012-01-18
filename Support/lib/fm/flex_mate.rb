@@ -187,7 +187,7 @@ module FlexMate
 		#
     def complete_by_scope
 
-			words = `grep "^$TM_CURRENT_WORD\(" "$TM_BUNDLE_PATH/support/data/completions.txt"`.split("\n")
+			words = `grep "^$TM_CURRENT_WORD\(" "$TM_BUNDLE_SUPPORT/data/completions.txt"`.split("\n")
 
 			TextMate.exit_insert_snippet("()${1:;}") if words.empty?
 

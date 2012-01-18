@@ -253,6 +253,8 @@ end
 
 if __FILE__ == $0
 
+  puts ENV['TM_SUPPORT_PATH']
+  return
   require ENV['TM_SUPPORT_PATH'] + '/lib/escape'
   require ENV['TM_SUPPORT_PATH'] + '/lib/exit_codes'
   require ENV['TM_SUPPORT_PATH'] + '/lib/textmate'

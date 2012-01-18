@@ -23,7 +23,7 @@ module FCSHD
     end
 
     def generate_view(subtitle='__')
-
+      
       puts html_head(:window_title => "ActionScript 3",
                      :page_title => "fcshd", 
                      :sub_title => subtitle );
