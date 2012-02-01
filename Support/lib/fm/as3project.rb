@@ -8,8 +8,8 @@ require "logger"
 
 module AS3Project
 
-    @logger = Logger.new("#{ENV['HOME']}/Library/Logs/TextMate\ ActionScript\ 3.log")
-    @logger.level = Logger::DEBUG
+    # @logger = Logger.new("#{ENV['HOME']}/Library/Logs/TextMate\ ActionScript\ 3.log")
+    # @logger.level = Logger::DEBUG
 
     @project = ENV['TM_PROJECT_DIRECTORY']
     @build_yaml = nil
@@ -322,7 +322,7 @@ module AS3Project
         # Tmp fix – this assumes that we only would wan't folders as Dir.entries is used below
         if !File.exists?(directory) || !File.directory?(directory)
           # path is not a directory
-          @logger.debug("Directory: #{directory} IS NOT A DIRECTORY")
+          # @logger.debug("Directory: #{directory} IS NOT A DIRECTORY")
           next
         end
         
@@ -330,7 +330,7 @@ module AS3Project
 
           #Full path to file
           swc_path = File.join(project, p, entry)
-          @logger.debug("SWC PATH : #{swc_path}")
+          # @logger.debug("SWC PATH : #{swc_path}")
           extraction_path = File.join lib_path, entry
 
           #Checking if file changed
