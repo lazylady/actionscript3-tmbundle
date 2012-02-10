@@ -51,10 +51,28 @@
 		<dict>
 			<key>begin</key>
 			<string>\{</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.section.block.begin.actionscript</string>
+				</dict>
+			</dict>
 			<key>contentName</key>
 			<string>meta.scope.block.actionscript.3</string>
 			<key>end</key>
 			<string>\}</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.section.block.end.actionscript</string>
+				</dict>
+			</dict>
+			<key>name</key>
+			<string>meta.block.actionscript</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -981,11 +999,27 @@
 		<dict>
 			<key>begin</key>
 			<string>\{</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.section.block.begin.actionscript</string>
+				</dict>
+			</dict>
 			<key>comment</key>
 			<string>TODO, find a way for this to exist alongside
 		               an interface that has not been extended.</string>
 			<key>end</key>
 			<string>\}</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.section.block.end.actionscript</string>
+				</dict>
+			</dict>
 			<key>name</key>
 			<string>invalid.illegal.actionscript.3</string>
 		</dict>
@@ -1618,8 +1652,24 @@
 		<dict>
 			<key>begin</key>
 			<string>\{</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.section.block.begin.actionscript</string>
+				</dict>
+			</dict>
 			<key>end</key>
 			<string>\}</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.section.block.end.actionscript</string>
+				</dict>
+			</dict>
 			<key>name</key>
 			<string>meta.function.actionscript.3</string>
 			<key>patterns</key>
@@ -2046,8 +2096,24 @@
 		<dict>
 			<key>begin</key>
 			<string>\{</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.section.block.begin.actionscript</string>
+				</dict>
+			</dict>
 			<key>end</key>
 			<string>\}</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.section.block.end.actionscript</string>
+				</dict>
+			</dict>
 			<key>name</key>
 			<string>meta.package.actionscript.3</string>
 			<key>patterns</key>
