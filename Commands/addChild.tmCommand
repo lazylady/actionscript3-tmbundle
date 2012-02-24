@@ -30,21 +30,28 @@ if word.match(controller)
 end
 
 snip = "addChild(#{word});"
-
-TextMate.exit_insert_snippet( snip )</string>
+print snip</string>
 	<key>fallbackInput</key>
 	<string>word</string>
 	<key>input</key>
 	<string>document</string>
+	<key>inputFormat</key>
+	<string>text</string>
 	<key>name</key>
 	<string>addChild</string>
-	<key>output</key>
-	<string>discard</string>
+	<key>outputCaret</key>
+	<string>afterOutput</string>
+	<key>outputFormat</key>
+	<string>text</string>
+	<key>outputLocation</key>
+	<string>atCaret</string>
 	<key>scope</key>
 	<string>source.actionscript.3</string>
 	<key>tabTrigger</key>
 	<string>addChild</string>
 	<key>uuid</key>
 	<string>38EE74D6-05BF-485E-BD9F-B7EF23A6327D</string>
+	<key>version</key>
+	<string>2</string>
 </dict>
 </plist>
