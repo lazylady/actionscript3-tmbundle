@@ -19,10 +19,8 @@ module FlexMate
         require ENV['TM_SUPPORT_PATH'] + '/lib/textmate'
 
         #NOTE: this order is important as it represents the precedence tm uses
-        paths = [ "#{ENV['HOME']}/Library/Application Support/TextMate/Bundles",
-                  "#{ENV['HOME']}/Library/Application Support/TextMate/Pristine Copy/Bundles",
-                  "/Library/Application Support/TextMate/Bundles"
-        ]
+        # Changed for Avian – TM2
+        paths = [ "#{ENV['HOME']}/Library/Application Support/Avian/Bundles"]
 
         begin
           paths << TextMate::app_path.gsub('(.*?)/MacOS/TextMate','\1') + "/Contents/SharedSupport/Bundles"
@@ -70,9 +68,8 @@ module FlexMate
           }
           found << { 'title' => '---' } if found.any?
         }
-
-        found.pop if found.last['title'] == '---'
         
+        found.pop if found.last['title'] == '---'
         found
       end
 
