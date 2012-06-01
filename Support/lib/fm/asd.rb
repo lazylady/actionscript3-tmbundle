@@ -99,7 +99,7 @@ class LangReference
     return "#{@name}<p><ul><li>#{@name} language reference not found.</li></ul></p>" unless usable
 
     setup_regex(word)
-
+    
     ::IO.readlines(@toc).each do |line|
       if line =~ @exact_rgx
         m = $1 
@@ -145,8 +145,7 @@ class LangReference
     else
 
       out << lang_ref
-      out << "<ul><li>No results</li></ul><br>"
-
+      out << "<ul><li>No results</li></ul><br><br>"
     end
 
   end
@@ -177,16 +176,26 @@ end
 class FlexLangReference < LangReference
 
   def initialize()
-    super
-    @name     = 'Flex SDK'
-    @path     = ENV['TM_FLEX_PATH'] + '/docs/langref'
-    #         This covers the odd case where the user has built the docs using the 
-    #         tasks provided with the SDK.
-    @path     = ENV['TM_FLEX_PATH'] + '/asdoc-output' unless File.directory?(@path)
-    @toc      = ENV['TM_BUNDLE_SUPPORT'] + '/data/doc_dictionary.xml'
-    @lang_ref = "<a href='tm-file://#{@path}/index.html'" +
-                "title = '#{@name} - Flex Language Reference Index'>Flex&trade; Language Reference</a>"
+      super
+      @name     = 'Flex SDK'
+      @path     = ENV['TM_FLEX_PATH'] + '/docs/langref'
+      #         This covers the odd case where the user has built the docs using the 
+      #         tasks provided with the SDK.
+      @path     = ENV['TM_FLEX_PATH'] + '/asdoc-output' unless File.directory?(@path)
+      # @toc      = ENV['TM_BUNDLE_SUPPORT'] + '/data/doc_dictionary.xml'
+      @toc      = "#{@path}/helpmap.txt"
+      @lang_ref = "<a href='tm-file://#{@path}/index.html'" +
+                  "title = '#{@name} - Flex Language Reference Index'>Flex&trade; Language Reference</a>"
+    end
+
+  protected
+
+  def setup_regex(word)
+    @exact_rgx = /#{word}\t(.*)\t/
+    @partial_rgx = /#{word}[\w:]+\t(.*)(\t)/
   end
+
+  
 
 end
 
@@ -232,8 +241,8 @@ end
 
 if __FILE__ == $0
 
-  ENV['TM_BUNDLE_SUPPORT'] = "/Users/#{ENV['USER']}/Documents/code/git/actionscript3-tmbundle/Support"
-  ENV['TM_FLEX_PATH'] = '/Developer/SDKs/flex_sdk_3.2.0'
+  # ENV['TM_BUNDLE_SUPPORT'] = "/Users/#{ENV['USER']}/Documents/code/git/actionscript3-tmbundle/Support"
+  # ENV['TM_FLEX_PATH'] = '/users/lazylady/Developer/SDKs/flex_sdk_4.6'
 
   term = FlexMate::ASD.request_search_term()
 
