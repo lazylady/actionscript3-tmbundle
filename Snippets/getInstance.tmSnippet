@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>public static function getInstance():$1
+{
+	private static var instance:$1;
+	if(!instance)
+	{
+		instance = new $1();
+	}
+	return instance;
+}</string>
+	<key>name</key>
+	<string>getInstance</string>
+	<key>scope</key>
+	<string>source.actionscript.3</string>
+	<key>tabTrigger</key>
+	<string>getInstance</string>
+	<key>uuid</key>
+	<string>3FC8E696-F44B-42CD-83DA-46A1C8EDC548</string>
+</dict>
+</plist>
