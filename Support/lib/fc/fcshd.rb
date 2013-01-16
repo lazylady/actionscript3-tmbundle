@@ -82,11 +82,7 @@ module FCSHD
     end
 
     def close_window
-      print "<script type='text/javascript' charset='utf-8'>
-            window.close();
-      </script>"
+      TextMate.exit_discard
     end
-
   end
-
 end

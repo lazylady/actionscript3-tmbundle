@@ -244,8 +244,7 @@ module AS3Project
 
           if ENV["TM_BUILD_AND_RUN"].to_i == 1
             run
-            # Remove until TM 2 stops crashing when using window.close()
-            # FCSHD.close_window
+            FCSHD.close_window
           end
 
         else
