@@ -18,7 +18,5 @@ package ${TM_CLASS_PATH}
 		{
 			${4}
 		}
-		
 	}
-	
 }
