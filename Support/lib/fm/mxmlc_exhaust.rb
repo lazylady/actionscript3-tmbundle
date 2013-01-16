@@ -43,8 +43,18 @@ class MxmlcExhaust
   def line(str)
     @input << str
     output = parse_line(str)
-    print output if print_output
+    print output << force_refresh if print_output
     output
+  end
+
+  # Forces content to be displayed from bottom
+  def force_refresh
+    refresh_html = ""
+    refresh_html << "<script type='text/javascript' charset='utf-8'>
+      var element = document.getElementById('tm_webpreview_body');
+      document.body.scrollTop = element.offsetHeight;
+    </script>"
+    refresh_html
   end
 
   # This method should be called once compilations is complete. It outputs
