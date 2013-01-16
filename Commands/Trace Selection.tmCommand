@@ -13,15 +13,23 @@
   </string>
 	<key>input</key>
 	<string>document</string>
+	<key>inputFormat</key>
+	<string>text</string>
 	<key>keyEquivalent</key>
 	<string>@=</string>
 	<key>name</key>
 	<string>Trace Selection</string>
-	<key>output</key>
-	<string>insertAsSnippet</string>
+	<key>outputCaret</key>
+	<string>afterOutput</string>
+	<key>outputFormat</key>
+	<string>snippet</string>
+	<key>outputLocation</key>
+	<string>replaceSelection</string>
 	<key>scope</key>
-	<string>source.actionscript.3</string>
+	<string>source.actionscript</string>
 	<key>uuid</key>
 	<string>A989F8DD-B5FB-497B-8554-1AC05C0ACDD8</string>
+	<key>version</key>
+	<integer>2</integer>
 </dict>
 </plist>
