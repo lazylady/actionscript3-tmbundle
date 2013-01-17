@@ -8,38 +8,27 @@
 	<string>#!/usr/bin/env ruby -wKU
 require ENV['TM_SUPPORT_PATH'] + '/lib/textmate'
 require ENV['TM_SUPPORT_PATH'] + '/lib/tm/process'
-# project = ENV['TM_PROJECT_DIRECTORY']
+
+# /Users/lazylady/Dropbox/Developer/SDKs/Flex/latest/bin/adt
+executable = ENV["TM_FLEX_PATH"] + "bin/adt"
 file_path = ENV["TM_FILEPATH"]
 air_files_path = File.dirname(file_path)
 project_name = ENV["TM_AIR_NAME"]
 pwd = ENV["TM_AIR_PWD"]
 full_project_name = air_files_path + "/" + project_name
-air_app_icons = air_files_path + "/" + ENV["TM_AIR_ICON"]
+air_app_icons = air_files_path + "/" + ENV["TM_AIR_ASSETS"]
 
-# adt -package -storetype pkcs12 -keystore "$AIR_CERT_FILE" -storepass "$AIR_CERT_PASS" $package_name".air" $package_name"-app.xml" $package_name".swf"
-# adt -package -storetype pkcs12 -keystore mycertificate.p12  
-# MyApplication.air MyApplication-descr.xml  
-# MyApplication.swf  
-run_command = "/Users/lazylady/Dropbox/Developer/SDKs/Flex/latest/bin/adt -package -storetype pkcs12 -keystore #{full_project_name}.p12"
+run_command = "#{executable} -package -storetype pkcs12 -keystore #{full_project_name}.p12"
 run_command += " -storepass #{pwd} #{full_project_name}.air #{full_project_name}-app.xml"
 # run_command += " #{full_project_name}.swf #{air_app_icons}"
 run_command += " #{full_project_name}.swf"
 
-# "adt -package -storetype pkcs12 -keystore DisplayComputer.p12 -storepass dasSecret DisplayComputer.air DisplayComputer-app.xml DisplayComputer.swf"
-# system(run_command)
-# user = "/Users/lazylady/Sites/flash/Licious/ShareWithMe/bin/DisplayComputer/"
-# /Users/lazylady/Dropbox/Developer/SDKs/Flex/latest/bin/adt -package -storetype pkcs12 -keystore /Users/lazylady/Sites/flash/Licious/ShareWithMe/bin/DisplayComputer/DisplayComputer.p12 -storepass dasSecret /Users/lazylady/Sites/flash/Licious/ShareWithMe/bin/DisplayComputer/DisplayComputer.air /Users/lazylady/Sites/flash/Licious/ShareWithMe/bin/DisplayComputer/DisplayComputer-app.xml /Users/lazylady/Sites/flash/Licious/ShareWithMe/bin/DisplayComputer/DisplayComputer.swf /Users/lazylady/Sites/flash/Licious/ShareWithMe/bin/DisplayComputer/icons/DC-Icon@128x128.png
-# puts run_command
-# puts run_command
-# system(run_command)
-tmp = "/Users/lazylady/Dropbox/Developer/SDKs/Flex/latest/bin/adt -package -storetype pkcs12 -keystore /Users/lazylady/Sites/flash/Licious/ShareWithMe/bin/DisplayComputer/DisplayComputer.p12 -storepass dasSecret /Users/lazylady/Sites/flash/Licious/ShareWithMe/bin/DisplayComputer/DisplayComputer.air /Users/lazylady/Sites/flash/Licious/ShareWithMe/bin/DisplayComputer/DisplayComputer-app.xml /Users/lazylady/Sites/flash/Licious/ShareWithMe/bin/DisplayComputer/DisplayComputer.swf /Users/lazylady/Sites/flash/Licious/ShareWithMe/bin/DisplayComputer/icons/DC-Icon@128x128.png"
-TextMate::Process.run(tmp) do |str|
+TextMate::Process.run(run_command) do |str|
   STDOUT &lt;&lt; str
 end
 
-# system("adt -package -storetype pkcs12 -keystore /Users/lazylady/Sites/flash/Licious/ShareWithMe/bin/DisplayComputer/DisplayComputer.p12 -storepass dasSecret /Users/lazylady/Sites/flash/Licious/ShareWithMe/bin/DisplayComputer/DisplayComputer.air /Users/lazylady/Sites/flash/Licious/ShareWithMe/bin/DisplayComputer/DisplayComputer-app.xml /Users/lazylady/Sites/flash/Licious/ShareWithMe/bin/DisplayComputer/DisplayComputer.swf /Users/lazylady/Sites/flash/Licious/ShareWithMe/bin/DisplayComputer/icons/DC-Icon@128x128.png")
-# TextMate.exit_show_tool_tip "Great job, Air app created!"
-TextMate.exit_show_tool_tip "Great job, Air app created!"</string>
+TextMate.exit_show_tool_tip "Great job, Air app created!"
+</string>
 	<key>input</key>
 	<string>none</string>
 	<key>keyEquivalent</key>
