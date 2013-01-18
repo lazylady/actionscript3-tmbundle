@@ -195,7 +195,6 @@ module SourceTools
   # using Textmate::UI.menu with the most probable match at the top of the menu.
   #
   def self.find_package(word="")
-
     TextMate.exit_show_tool_tip("Please select a class to\nlocate the package path for.") if word.empty?
 
     all_paths = search_all_paths(word)
