@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>public function show(animTime:Number = 0.4, animDelay:Number = 0.0):void
+{
+    new EazeTween(this).delay(animDelay).to(animTime, {alpha:1.0}).easing(Cubic.easeOut);
+}
+        
+public function hide(animTime:Number = 0.4, animDelay:Number = 0.0):void
+{
+    new EazeTween(this).delay(animDelay).to(animTime, {alpha:0.0}).easing(Cubic.easeOut);
+}</string>
+	<key>name</key>
+	<string>showhide</string>
+	<key>scope</key>
+	<string>source.actionscript</string>
+	<key>tabTrigger</key>
+	<string>showhide</string>
+	<key>uuid</key>
+	<string>F03ED4F8-1E7A-4A86-A6C2-554F07D06054</string>
+</dict>
+</plist>

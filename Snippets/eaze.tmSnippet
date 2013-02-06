@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>new EazeTween(${1:this}).to(${2:0.4}, {${3:alpha:}${4|0.0,1.0|}}).easing(${5:Cubic}.${6|easeOut,easeIn|});
+</string>
+	<key>name</key>
+	<string>eaze</string>
+	<key>scope</key>
+	<string>source.actionscript</string>
+	<key>tabTrigger</key>
+	<string>eaze</string>
+	<key>uuid</key>
+	<string>E4F1D68F-BC14-4D6F-A31D-4FEB23E7AE19</string>
+</dict>
+</plist>

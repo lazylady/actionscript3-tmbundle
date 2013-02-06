@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>private function mouseHandler(e:${1:MouseEvent}):void
+{
+    if(e.type == MouseEvent.ROLL_OVER)
+    {
+        $2
+    }
+    else
+    {
+        $3
+    }
+}</string>
+	<key>name</key>
+	<string>mouseHandler:if</string>
+	<key>scope</key>
+	<string>source.actionscript</string>
+	<key>tabTrigger</key>
+	<string>mouseHandler</string>
+	<key>uuid</key>
+	<string>CC55921C-FFB2-46BB-8345-CB8C80A10336</string>
+</dict>
+</plist>

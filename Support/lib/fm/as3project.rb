@@ -225,7 +225,6 @@ module AS3Project
         mxmlc_applications.each do |app|
           
             printf('<h3>Compiling %s</h3>', app["klass"])
-
             puts "<pre>"
             result = FCSHD_SERVER.build(app["mxmlc"])
             result.each_line do |line|
