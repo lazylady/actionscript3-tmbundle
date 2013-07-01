@@ -257,7 +257,7 @@ module AS3Project
     def self.run()
         if default_run_file != ""
           if default_run_file.include?("-app.xml") #it's an air app run adl
-            system("adl #{default_run_file}")
+            system("adl #{File.join(@project, default_run_file)}")
           #checking if the default_run_file is local or remote
           elsif default_run_file.include?("://") #oh man, we have a protocol (http://, https://, ftp://)
             system("open #{default_run_file}")
