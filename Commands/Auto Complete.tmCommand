@@ -5,18 +5,29 @@
 	<key>beforeRunningCommand</key>
 	<string>nop</string>
 	<key>command</key>
-	<string>"$TM_BUNDLE_SUPPORT/bin/complete"</string>
+	<string>#!/usr/bin/env bash
+[[ -f "${TM_SUPPORT_PATH}/lib/bash_init.sh" ]] &amp;&amp; . "${TM_SUPPORT_PATH}/lib/bash_init.sh"
+
+"$TM_BUNDLE_SUPPORT/bin/complete"</string>
 	<key>input</key>
 	<string>document</string>
+	<key>inputFormat</key>
+	<string>text</string>
 	<key>keyEquivalent</key>
 	<string>~</string>
 	<key>name</key>
 	<string>Auto Complete</string>
-	<key>output</key>
+	<key>outputCaret</key>
+	<string>afterOutput</string>
+	<key>outputFormat</key>
+	<string>text</string>
+	<key>outputLocation</key>
 	<string>discard</string>
 	<key>scope</key>
 	<string>source.actionscript.3 meta.package.actionscript.3 meta.class.actionscript.3, source.actionscript.3 meta.package.actionscript.3 meta.class.actionscript.3 meta.scope.following.dot.actionscript.3, text.xml.mxml source.actionscript.3.embedded.mxml</string>
 	<key>uuid</key>
 	<string>9D7FFA75-08E0-45C4-B982-13EC187D167E</string>
+	<key>version</key>
+	<integer>2</integer>
 </dict>
 </plist>
