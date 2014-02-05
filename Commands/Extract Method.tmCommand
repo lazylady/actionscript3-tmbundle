@@ -16,8 +16,6 @@
 	<string>document</string>
 	<key>inputFormat</key>
 	<string>text</string>
-	<key>keyEquivalent</key>
-	<string>^@g</string>
 	<key>name</key>
 	<string>Extract Method</string>
 	<key>outputCaret</key>

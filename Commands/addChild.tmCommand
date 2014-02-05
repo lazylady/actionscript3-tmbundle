@@ -5,7 +5,7 @@
 	<key>beforeRunningCommand</key>
 	<string>nop</string>
 	<key>command</key>
-	<string>#!/usr/bin/env ruby -wKU
+	<string>#!/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/ruby
 
 require ENV['TM_BUNDLE_SUPPORT'] + '/lib/c_env'
 
@@ -52,6 +52,6 @@ print snip</string>
 	<key>uuid</key>
 	<string>38EE74D6-05BF-485E-BD9F-B7EF23A6327D</string>
 	<key>version</key>
-	<string>2</string>
+	<integer>2</integer>
 </dict>
 </plist>
