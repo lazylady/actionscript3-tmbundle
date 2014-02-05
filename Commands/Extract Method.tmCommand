@@ -5,7 +5,7 @@
 	<key>beforeRunningCommand</key>
 	<string>nop</string>
 	<key>command</key>
-	<string>#!/usr/bin/env ruby
+	<string>#!/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/ruby
   
   require ENV['TM_BUNDLE_SUPPORT']+'/lib/refactor'
   r = Refactor.new
@@ -14,15 +14,23 @@
   </string>
 	<key>input</key>
 	<string>document</string>
+	<key>inputFormat</key>
+	<string>text</string>
 	<key>keyEquivalent</key>
 	<string>^@g</string>
 	<key>name</key>
 	<string>Extract Method</string>
-	<key>output</key>
-	<string>insertAsSnippet</string>
+	<key>outputCaret</key>
+	<string>afterOutput</string>
+	<key>outputFormat</key>
+	<string>snippet</string>
+	<key>outputLocation</key>
+	<string>replaceSelection</string>
 	<key>scope</key>
 	<string>source.actionscript.3</string>
 	<key>uuid</key>
 	<string>587EFEC5-5C6E-4357-988E-381844091C06</string>
+	<key>version</key>
+	<integer>2</integer>
 </dict>
 </plist>
