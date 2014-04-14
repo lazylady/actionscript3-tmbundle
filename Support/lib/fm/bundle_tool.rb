@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby -wKU
+#!/usr/bin/env ruby
 # encoding: utf-8
 
 # TextMate Bundle Utils.
@@ -21,6 +21,7 @@ module FlexMate
         #NOTE: this order is important as it represents the precedence tm uses
         # Changed for Avian – TM2
         paths = [ "#{ENV['HOME']}/Library/Application Support/Avian/Bundles"]
+        paths << "#{ENV['HOME']}/Library/Application Support/Avian/Pristine\ Copy/Bundles"
 
         begin
           paths << TextMate::app_path.gsub('(.*?)/MacOS/TextMate','\1') + "/Contents/SharedSupport/Bundles"
@@ -68,7 +69,6 @@ module FlexMate
           }
           found << { 'title' => '---' } if found.any?
         }
-        
         found.pop if found.last['title'] == '---'
         found
       end
@@ -99,9 +99,10 @@ if __FILE__ == $0
   puts FlexMate::BundleTool.find_bundle('ActionScript 3')
   puts FlexMate::BundleTool.find_bundle('Flex')
   puts FlexMate::BundleTool.find_bundle('Flash')
-
+  
   puts "\n--- Bundle Names (with file extension)"
   puts FlexMate::BundleTool.find_bundle('ActionScript 3.tmbundle')
+  puts FlexMate::BundleTool.find_bundle('ActionScript 3.tmundle')
   puts FlexMate::BundleTool.find_bundle('Flex.tmbundle')
   puts FlexMate::BundleTool.find_bundle('Flash.tmbundle')
   puts FlexMate::BundleTool.find_bundle('zzzzzz')
